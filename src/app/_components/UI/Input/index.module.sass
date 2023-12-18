@@ -1,0 +1,56 @@
+.inputBox
+  position: relative
+  width: 100%
+  margin: 10px 0
+
+  .label
+    position: absolute
+    top: 50%
+    left: 15px
+    transform: translateY(-50%)
+    transition: .2s
+    color: #fff
+    font-size: 16px
+    pointer-events: none
+
+  .input
+    width: 100%
+    padding: 15px
+    color: #fff
+    font-size: 16px
+    border: 1px solid #2f2f2f
+    background-color: transparent
+    border-radius: 10px
+    outline: none
+    &:hover
+      border: 1px solid #8774e1 !important
+
+    &:focus
+      border: none
+      border: 1px solid #8774e1
+
+    &::-webkit-input-placeholder
+      opacity: 0
+
+    &:focus::-webkit-input-placeholder
+      opacity: 1
+
+    &:focus,
+    &:not(:placeholder-shown)
+      &+.label
+        font-size: 14px
+        top: 0
+        background-color: #212121
+        padding: 0 5px
+
+.succes
+  input
+    border: 1px solid #2fcf6d !important
+  label
+    color: #2fcf6d
+
+.error
+  input
+    border: 1px solid #ff595a !important
+  label
+    color: #ff595a
