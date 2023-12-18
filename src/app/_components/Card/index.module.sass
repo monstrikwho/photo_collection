@@ -1,0 +1,64 @@
+@import '../../_styles/queries'
+
+.card
+  display: flex
+  flex-direction: column
+  border-radius: 8px
+  background: #1C1C1C
+  overflow: hidden
+
+.content
+  padding: 8px 15px
+  display: flex
+  justify-content: space-between
+
+.likes
+  display: flex
+  align-items: center
+  cursor: pointer
+  &:hover
+    color: #aaa
+
+.heart
+  display: flex
+  align-items: center
+
+.count
+  margin-left: 8px
+
+.color
+  display: flex
+  align-items: center
+
+.colorText
+  color: #a6c0d9
+
+.colorSquare
+  margin-right: 4px
+  width: 16px
+  height: 16px
+  border: 1px solid #E3F5FF
+
+.mediaWrapper
+  text-decoration: none
+  display: block
+  position: relative
+  min-height: 260px
+
+.likes.active
+  color: rgb(255, 48, 64)
+  .heart
+    animation-duration: 1000ms
+    animation-name: like-heart-animation
+    animation-timing-function: ease-in-out
+
+@keyframes like-heart-animation
+  0%
+    transform: scale(0)
+  15%
+    transform: scale(1.2)
+  30%
+    transform: scale(0.95)
+  45%,
+  80%
+    transform: scale(1)
