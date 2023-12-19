@@ -21,16 +21,16 @@ export default function Card({ data }: CardProps) {
   const [like, setLike] = useState(false);
 
   useEffect(() => {
-    const controller = new AbortController();
-
     const findPhoto = async () => {
       const photo = await findFavoritePhoto(data.id);
-      if (photo) setLike(true);
+      if (photo) {
+        setLike(true);
+      } else {
+        setLike(false);
+      }
     };
 
     findPhoto();
-
-    return () => controller.abort();
   }, [data.id]);
 
   const handleClick = () => {
