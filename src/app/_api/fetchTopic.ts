@@ -1,38 +1,31 @@
-type FetchByTopicProps = {
-  topic?: string;
-  page: number;
-  perPage: number;
+import fakeDelay from "../_utils/delay";
+
+type FetchTopicProps = {
+  slug: string;
+  delay?: number;
 };
 
-export const fetchByTopic = async ({
-  topic = "default",
-  page,
-  perPage,
-}: FetchByTopicProps) => {
+export const fetchTopic = async ({ slug, delay }: FetchTopicProps) => {
   try {
-    let url = "";
-
-    if (topic === "default") {
-      url = `${process.env.NEXT_PUBLIC_API_URL}/photos?page=${page}&per_page=${perPage}&client_id=${process.env.NEXT_PUBLIC_ACCESS_KEY}`;
-    } else {
-      url = `${process.env.NEXT_PUBLIC_API_URL}/topics/${topic}/photos?page=${page}&per_page=${perPage}&client_id=${process.env.NEXT_PUBLIC_ACCESS_KEY}`;
-    }
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/topics/${slug}?client_id=${process.env.NEXT_PUBLIC_ACCESS_KEY}`;
 
     const res = await fetch(url, { method: "GET" });
 
+    if (delay) await fakeDelay(delay);
+
     if (res.ok) {
       const data = await res.json();
-      const cleaned = data.map((item: any) => ({
-        id: item.id,
-        alt: item.alt_description,
-        src: item.urls.small,
-        likes: item.likes,
-        color: item.color,
-      }));
-      return cleaned;
+      return {
+        id: data.id,
+        slug: data.slug,
+        title: data.title,
+        desc: data.description,
+        total_photos: data.total_photos,
+        cover_photo: data.cover_photo.urls.small,
+      };
     }
 
-    throw new Error("Ошибка в запросе метода updatePhotosByTopic");
+    return null;
   } catch (error) {
     console.log("error", error);
     return null;
