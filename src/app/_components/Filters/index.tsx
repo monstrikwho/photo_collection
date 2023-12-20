@@ -30,15 +30,15 @@ export default function Filter() {
 
   return (
     <div className={classes.filter} ref={ref}>
-      <div className={classes.filterBtn} onClick={handleChangeVisible}>
-        {!isOpen ? <FilterListIcon /> : <CloseIcon />}
-      </div>
       {filter && (
         <ActiveFilter
           title={filter.title}
           handleDeleteFilter={handleDeleteFilter}
         />
       )}
+      <div className={classes.filterBtn} onClick={handleChangeVisible}>
+        {!isOpen ? <FilterListIcon /> : <CloseIcon />}
+      </div>
       <FilterPopup topics={topics} isOpen={isOpen} />
     </div>
   );
