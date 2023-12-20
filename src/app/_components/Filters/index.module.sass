@@ -1,0 +1,73 @@
+.filter
+  position: relative
+
+.filterBtn
+  padding: .5rem
+  display: flex
+  color: #ffa116
+  background-color: #ffa1161f
+  border-radius: 50%
+  cursor: pointer
+  &:hover
+    background-color: #ffa21634
+
+.closeBtn
+  padding: .375rem
+  margin-left: 8px
+  display: flex
+  border-radius: 50%
+  cursor: pointer
+  &:hover
+    background-color: #2cbb5d1f
+
+.activeFilter
+  padding: .375rem .5rem .375rem 1rem
+  height: 100%
+  position: absolute
+  right: 120%
+  top: 0
+  display: flex
+  align-items: center
+  color: rgb(44 187 93)
+  white-space: nowrap
+  background-color: #2cbb5d1f
+  border-radius: 999px
+
+.filterPopup
+  padding: .5rem
+  width: 200px
+  max-height: 400px
+  display: none
+  background: rgb(48 48 48)
+  border-radius: 8px
+  overflow-y: auto
+  z-index: 99
+  &::-webkit-scrollbar
+    width: .5rem
+  &::-webkit-scrollbar-track
+    background-color: rgb(125 125 125)
+    border-radius: 100vw
+  &::-webkit-scrollbar-thumb
+    height: 2px
+    background-color: rgb(40 40 40)
+    border-radius: 100vw
+
+.visible
+  position: absolute
+  top: 120%
+  right: 0
+  display: flex
+  flex-direction: column
+
+.filterItem
+  border-radius: 6px
+  &:hover
+    background-color: #ffffff12
+
+.filterLink
+  padding: .375rem .5rem
+  height: 2rem
+  display: flex
+  align-items: center
+  color: #ffa116
+  font-size: 14px
