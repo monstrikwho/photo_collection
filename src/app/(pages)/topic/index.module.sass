@@ -1,0 +1,39 @@
+.filterCard
+  height: 200px
+  width: 100%
+  position: relative
+  margin-bottom: 20px
+  border-radius: 20px
+  overflow: hidden
+  &:hover
+    .boxImage
+      &::before
+        background-color: rgba(0, 0, 0, 0.1)
+    .cardTitle
+      color: #e3e3e3
+
+.boxImage
+  position: absolute
+  left: 0
+  right: 0
+  top: 0
+  bottom: 0
+  z-index: 0
+  &::before
+    content: ""
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-color: rgba(0, 0, 0, 0.7)
+    z-index: 99
+
+.cardTitle
+  position: absolute
+  left: 20px
+  bottom: 20px
+  font-size: 42px
+  color: #fff
+  z-index: 999
+  
