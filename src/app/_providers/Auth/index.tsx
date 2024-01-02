@@ -3,6 +3,7 @@ import React, { createContext, useCallback, useEffect, useState } from "react";
 
 import {
   Profile,
+  ActiveProfile,
   addProfile,
   addActiveProfile,
   getActiveProfile,
@@ -12,7 +13,7 @@ import {
 
 type Login = (args: { username: string }) => Promise<Profile>;
 type Logout = () => Promise<void>;
-type UpdateUser = () => Promise<void>;
+type UpdateUser = () => Promise<ActiveProfile | null>;
 
 type IContextType = {
   user: Profile | null;
@@ -64,16 +65,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, []);
 
-  const updateUser = useCallback<Logout>(async () => {
+  const updateUser = useCallback<UpdateUser>(async () => {
     try {
       const user = await getActiveProfile();
       setUser(user);
       user ? setStatus("loggedIn") : setStatus("loggedOut");
+      return user;
     } catch (e) {
       console.log(e);
-      throw new Error(
-        "Произошла ошибка при попытке обновления данных пользователя."
-      );
+      return null;
     }
   }, []);
 

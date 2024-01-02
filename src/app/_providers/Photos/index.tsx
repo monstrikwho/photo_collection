@@ -42,12 +42,12 @@ export const PhotosProvider: React.FC<ProviderProps> = ({ children }) => {
 
   const sortPhotosByLike = (value: PayloadLikeValue) => {
     const sorted = sortByLikes(photos, value);
-    setPhotos(sorted);
+    setPhotos([...sorted]);
   };
 
   const sortPhotosByDate = (value: PayloadDateValue) => {
     const sorted = sortByDate(photos, value);
-    setPhotos(sorted);
+    setPhotos([...sorted]);
   };
 
   const updatePhotos = useCallback((photos: Photo[], len: number) => {
