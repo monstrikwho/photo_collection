@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -12,6 +13,7 @@ import {
   deleteFavoritePhoto,
   findFavoritePhoto,
 } from "../../_services/database";
+import { AuthContext } from "../../_providers/Auth";
 
 interface CardProps {
   data: Photo;
@@ -19,6 +21,8 @@ interface CardProps {
 
 export default function Card({ data }: CardProps) {
   const [like, setLike] = useState(false);
+  const router = useRouter();
+  const { status } = useContext(AuthContext);
 
   useEffect(() => {
     const findPhoto = async () => {
@@ -34,6 +38,10 @@ export default function Card({ data }: CardProps) {
   }, [data.id]);
 
   const handleClick = () => {
+    if (status === "loggedOut") {
+      return router.push("/favorites");
+    }
+
     if (!like) {
       addFavoritePhoto(data);
     } else {
