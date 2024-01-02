@@ -22,7 +22,7 @@ interface CardProps {
 export default function Card({ data }: CardProps) {
   const [like, setLike] = useState(false);
   const router = useRouter();
-  const { status } = useContext(AuthContext);
+  const { status, updateUser } = useContext(AuthContext);
 
   useEffect(() => {
     const findPhoto = async () => {
@@ -37,16 +37,18 @@ export default function Card({ data }: CardProps) {
     findPhoto();
   }, [data.id]);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (status === "loggedOut") {
       return router.push("/favorites");
     }
 
     if (!like) {
       addFavoritePhoto(data);
+      updateUser();
     } else {
       deleteFavoritePhoto(data.id);
     }
+
     setLike(!like);
   };
 

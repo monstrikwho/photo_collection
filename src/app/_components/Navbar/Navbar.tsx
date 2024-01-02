@@ -7,7 +7,7 @@ import { useContext } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CollectionsIcon from "@mui/icons-material/Collections";
 
-import styles from "./styles.module.sass";
+import classes from "./index.module.sass";
 import { PhotosContext } from "../../_providers/Photos";
 
 export default function Navbar() {
@@ -17,19 +17,19 @@ export default function Navbar() {
   const handleChangeNav = () => updatePage(1);
 
   const classCollections = clsx(
-    styles.bottomNavigationAction,
-    pathname === "/" ? styles.activeAction : ""
+    classes.bottomNavigationAction,
+    pathname === "/" ? classes.activeAction : ""
   );
 
   const classFavorites = clsx(
-    styles.bottomNavigationAction,
-    pathname === "/favorites" ? styles.activeAction : ""
+    classes.bottomNavigationAction,
+    pathname === "/favorites" ? classes.activeAction : ""
   );
 
   return (
-    <nav className={styles.navbar}>
-      <div className={styles.actions}>
-        <div className={styles.bottomNavigaton}>
+    <nav className={classes.navbar}>
+      <div className={classes.actions}>
+        <div className={classes.bottomNavigaton}>
           <Link href="/" className={classCollections} onClick={handleChangeNav}>
             <CollectionsIcon />
             <span>Collections</span>
