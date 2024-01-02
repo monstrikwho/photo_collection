@@ -21,6 +21,7 @@ interface CardProps {
 
 export default function Card({ data }: CardProps) {
   const [like, setLike] = useState(false);
+  const [isDoubleClicked, setIsDoubleClicked] = useState(false);
   const router = useRouter();
   const { status, updateUser } = useContext(AuthContext);
 
@@ -52,10 +53,34 @@ export default function Card({ data }: CardProps) {
     setLike(!like);
   };
 
+  const handleDoubleClick = () => {
+    if (status === "loggedOut") {
+      return router.push("/favorites");
+    }
+
+    if (!like) {
+      addFavoritePhoto(data);
+      updateUser();
+      setLike(!like);
+    }
+
+    setIsDoubleClicked(true);
+    setTimeout(() => {
+      setIsDoubleClicked(false);
+    }, 500);
+  };
+
   const likeClasses = clsx(classes.likes, like && classes.active);
+  const bigHeartClasses = clsx(
+    classes.bigHeart,
+    isDoubleClicked && classes.active
+  );
 
   return (
-    <div className={classes.card}>
+    <div className={classes.card} onDoubleClick={handleDoubleClick}>
+      <div className={bigHeartClasses}>
+        <FavoriteIcon />
+      </div>
       <div className={classes.mediaWrapper}>
         <Media resource={data} fill />
       </div>
