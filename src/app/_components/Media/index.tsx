@@ -26,7 +26,7 @@ const Image: React.FC<MediaProps> = (props) => {
     <NextImage
       className={classes.image}
       src={resource.src}
-      alt={resource.alt}
+      alt={resource.alt || "unsplash image"}
       fill={fill}
       width={!fill ? width : undefined}
       height={!fill ? height : undefined}
